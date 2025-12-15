@@ -13,7 +13,7 @@ spec:
     image: jenkins/inbound-agent:latest
     args: ['\$(JENKINS_SECRET)', '\$(JENKINS_NAME)']
   - name: kubectl
-    image: bitnami/kubectl:latest
+    image: bitnami/kubectl:1.27-debian-11
     command:
     - cat
     tty: true
@@ -22,7 +22,7 @@ spec:
     }
 
     environment {
-        NAMESPACE = "default"
+        NAMESPACE = "ci"
     }
 
     stages {
