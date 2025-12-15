@@ -1,0 +1,37 @@
+pipeline {
+    agent any
+
+    environment {
+        NAMESPACE = "default"
+    }
+
+    stages {
+        stage('Dev-Checkout') {
+            steps {
+                git branch: 'main', url: 'https://github.com/your-org/your-repo.git'
+            }
+        }
+
+        stage('Deploy to Kubernetes') {
+            steps {
+                script {
+                    sh """
+                      kubectl apply -f k8s/ -n ${NAMESPACE}
+                      for deployment in \$(kubectl get deployments -n ${NAMESPACE} -o name); do
+                        kubectl rollout status \$deployment -n ${NAMESPACE}
+                      done
+                    """
+                }
+            }
+        }
+    }
+
+    post {
+        success {
+            echo "✅ Kubernetes manifests deployed successfully!"
+        }
+        failure {
+            echo "❌ Deployment failed."
+        }
+    }
+}
