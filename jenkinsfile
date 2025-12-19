@@ -37,6 +37,7 @@ spec:
                 script {
                     sh """
                       kubectl apply -f k8s/ -n ${NAMESPACE}
+                      kubectl rollout restart deployment nginx-demo -n ${NAMESPACE}
                       for deployment in \$(kubectl get deployments -n ${NAMESPACE} -o name); do
                         kubectl rollout status \$deployment -n ${NAMESPACE}
                       done
