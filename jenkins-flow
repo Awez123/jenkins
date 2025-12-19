@@ -1,0 +1,31 @@
+jenkins -- ci/cd
+
+Architecture -- master/agent 
+jenkins master -- actuall console   / jenkins agent -- created by master when running a pipeline
+
+hh -->
+jenkins master is on ec2
+and jenkins agent is on dev cluster
+
+master -- only one instace, also it can be a docker container, kubernetes pod, or a sepereate ec2 server
+agents -- it can be , a docker container, kubernetes pod, or a sepereate ec2 server  -- can be multiple
+
+
+1 gitrepo -- jenkinsfile(actuall pipeline) --> jenkins console pipeline configure
+
+
+authentication methods:
+1. jenkins database -- stored on the jenkins master
+2. saml2.0 -- 3rd party identity provider -- okta,keycloak,microsoft saml -- most used -- hh
+3. ldap -- linux/ldap based authentication
+
+authorization:
+1. matrix based -- works best with saml
+
+
+jenkins -- master - seperate server/ agent -- seperate or same server
+github actions -- master is managed by github -- agents are managed my customer
+
+forge -- sepereate server
+
+dev build --> repo push --> action --> paste in the ngixn dir

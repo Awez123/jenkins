@@ -1,7 +1,7 @@
 pipeline {
     agent {
         kubernetes {
-            label 'kubectl-agent'
+            label 'nginx-agent'
             defaultContainer 'kubectl'
             yaml """
 apiVersion: v1
